@@ -149,13 +149,11 @@ form.addEventListener('submit', function (event) {
     createdAt: new Date()
   }
 
-  // data.unshift(newDiscussion)
-  // 로컬스토리지에 저장
-  // localStorage.setItem("agoraStatesDiscussions", JSON.stringify(data))
-  // render(ul, 0, limit)
+  // 서버 연결 x
+  data.unshift(newDiscussion)
+  localStorage.setItem("agoraStatesDiscussions", JSON.stringify(data))
+  render(ul, 0, limit)
 
-  titleInput.value = '';
-  storyInput.value = '';
   // 서버 연결
   fetch(`http://localhost:4000/discussions`, {
     method: 'POST',
@@ -170,6 +168,12 @@ form.addEventListener('submit', function (event) {
     localStorage.setItem("agoraStatesDiscussions", JSON.stringify(data))
     render(ul, 0, limit)
   })
+  .catch(err => {
+    console,log("Error: ", err)
+  })
+  
+  titleInput.value = '';
+  storyInput.value = '';
 })
 
 // 서버와 연결하기
